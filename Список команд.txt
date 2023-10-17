@@ -1,0 +1,63 @@
+u1 = User.objects.create_user(username = 'Alexey')
+u2 = User.objects.create_user(username = 'Dmitriy')
+
+Author.objects.create(authorUser=u1)
+Author.objects.create(authorUser=u2)
+
+Category.objects.create(name='Football')
+Category.objects.create(name='Basketball')
+Category.objects.create(name='IT')
+Category.objects.create(name='Volleyball')
+
+author = Author.objects.get(id=1)
+author2 = Author.objects.get(id=2)
+
+
+Post.objects.create(author=author, choice='NW', head='sometitle', text_post='sometext')
+Post.objects.create(author=author2, choice='AR', head='sometitleAR', text_post='sometextAR')
+Post.objects.create(author=author, choice='AR', head='sometitleAR2', text_post='sometextAR2')
+
+Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+Post.objects.get(id=1).postCategory.add(Category.objects.get(id=3))
+Post.objects.get(id=2).postCategory.add(Category.objects.get(id=2))
+Post.objects.get(id=3).postCategory.add(Category.objects.get(id=4))
+
+
+
+Comment.objects.create(com_post=Post.objects.get(id=1), user_com=Author.objects.get(id=1).authorUser, text_com="anytextbyauthor1")
+Comment.objects.create(com_post=Post.objects.get(id=1), user_com=Author.objects.get(id=2).authorUser, text_com="anytextbyauthor2")
+Comment.objects.create(com_post=Post.objects.get(id=2), user_com=Author.objects.get(id=1).authorUser, text_com="anytextbyauthor1")
+Comment.objects.create(com_post=Post.objects.get(id=3), user_com=Author.objects.get(id=3).authorUser, text_com="anytextbyauthor3")
+
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=2).dislike()
+Comment.objects.get(id=3).like()
+
+a1 = Author.objects.get(id=1)
+a2 = Author.objects.get(id=2)
+a1.update_rating()
+a2.update_rating()
+
+a = Author.objects.order_by('-rat_author')[:1]
+
+for i in a:
+	i.rat_author
+	i.authorUser.username
+
+p = Post.objects.order_by('-rat_post')[:1]
+
+for i in b:
+	i.create_post
+	i.author.authorUser.username
+	i.rat_post
+	i.head
+	i.preview()
+
+c = Comment.objects.order_by('-rat_com')
+
+for i in c:
+	i.create_com
+	i.user_com.username
+	i.rat_com
+	i.text_com
