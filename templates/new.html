@@ -9,6 +9,6 @@ Post
 <!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
 {% block content %}
 <h1>{{ new.head }}</h1>
-<h2>{{ new.create_post|date:'d M Y' }}</h2>
+<h2>{{ new.data|date:'d M Y' }}</h2>
 <h2>{{ new.text_post}}</h2>
 {% endblock content %}
