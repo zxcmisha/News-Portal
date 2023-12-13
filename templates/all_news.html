@@ -14,12 +14,21 @@ Post
 
 
    <hr>
+
+   {% if perms.News.add_news %}
+   <a href="{% url 'news_create' %}">Добавить Пост</a>
+   {% endif %}
+
    {% if all_news %}
        <table>
            <tr>
                <td>Заголовок</td>
                <td>Дата публикации</td>
                <td>Превью</td>
+
+               {% if perms.News.change_news or perms.News.delete_news %}
+               <td>Действия</td>
+               {% endif %}
            </tr>
 
            {% for new in all_news %}
@@ -27,6 +36,15 @@ Post
                <td>{{ new.head }}</td>
                <td>{{ new.create_post|date:'d M Y' }}</td>
                <td>{{ new.text_post|truncatewords:20 }}</td>
+               
+               <td>
+                   {% if perms.News.change_news %}
+                   <a href="{% url 'news_edit' pk=new.id %}">Изменить</a>
+                   {% endif %}
+                   {% if perms.News.delete_news %}
+                   <a href="{% url 'news_delete' new.id %}">Удалить</a>
+                   {% endif %}
+               </td>
            </tr>
            {% endfor %}
 
