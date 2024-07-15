@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'News',
     'django.contrib.sites',
+    'News.apps.NewsConfig',
     'django.contrib.flatpages',
     'django_filters',
     'allauth',
@@ -93,6 +93,18 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "dmitrychupyr@yandex.ru"
+EMAIL_HOST_PASSWORD = "pmhjsxogrdncacwx"
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+DEFAULT_FROM_EMAIL = "dmitrychupyr@yandex.ru"
+
+SERVER_EMAIL = "dmitrychupyr@yandex.ru"
 
 ACCOUNT_FORMS = {"signup": "accounts.forms.CustomSignupForm"}
 # Database
@@ -150,3 +162,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+SITE_URL = 'http://127.0.0.1:8000'
